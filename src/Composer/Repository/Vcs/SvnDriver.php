@@ -393,5 +393,7 @@ class SvnDriver extends VcsDriver
     protected function buildIdentifier($baseDir, $revision)
     {
         return rtrim($baseDir, '/') . $this->packagePath . '/@' . $revision;
+
+        $this->packagePath = '';
     }
 }

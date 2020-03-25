@@ -32,6 +32,7 @@ class GitHubDriver extends VcsDriver
     protected $rootIdentifier;
     protected $repoData;
     protected $hasIssues;
+    protected $packagePath = '';
     protected $infoCache = array();
     protected $isPrivate = false;
     private $isArchived = false;
@@ -57,6 +58,10 @@ class GitHubDriver extends VcsDriver
             $this->originUrl = 'github.com';
         }
         $this->cache = new Cache($this->io, $this->config->get('cache-repo-dir').'/'.$this->originUrl.'/'.$this->owner.'/'.$this->repository);
+
+        if (isset($this->repoConfig['package-path'])) {
+            $this->packagePath = trim($this->repoConfig['package-path']);
+        }
 
         if ( $this->config->get('use-github-api') === false || (isset($this->repoConfig['no-api']) && $this->repoConfig['no-api'] ) ){
             $this->setupGitDriver($this->url);

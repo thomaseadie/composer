@@ -33,6 +33,7 @@ abstract class BitbucketDriver extends VcsDriver
     protected $homeUrl = '';
     protected $website = '';
     protected $cloneHttpsUrl = '';
+    protected $packagePath = '';
 
     /**
      * @var VcsDriver
@@ -59,6 +60,10 @@ abstract class BitbucketDriver extends VcsDriver
                 $this->repository,
             ))
         );
+
+        if (isset($this->repoConfig['package-path'])) {
+            $this->packagePath = trim($this->repoConfig['package-path']);
+        }
     }
 
     /**

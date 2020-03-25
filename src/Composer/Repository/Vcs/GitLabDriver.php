@@ -31,6 +31,7 @@ class GitLabDriver extends VcsDriver
     private $scheme;
     private $namespace;
     private $repository;
+    protected $packagePath = '';
 
     /**
      * @var array Project data returned by GitLab API
@@ -98,6 +99,10 @@ class GitLabDriver extends VcsDriver
 
         if (false !== strpos($this->originUrl, ':') || false !== strpos($this->originUrl, '/')) {
             $this->hasNonstandardOrigin = true;
+        }
+
+        if (isset($this->repoConfig['package-path'])) {
+            $this->packagePath = trim($this->repoConfig['package-path']);
         }
 
         $this->namespace = implode('/', $urlParts);
